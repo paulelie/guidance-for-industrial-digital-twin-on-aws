@@ -134,7 +134,7 @@ The deployment of the demo is spread out over several cloudformation stacks. The
 
 ``` bash
 yum install -y git
-git clone https://github.com/aws-solutions-library-samples/guidance-for-industrial-digital-twin-on-aws.git                             
+git clone https://github.com/paulelie/guidance-for-industrial-digital-twin-on-aws.git                          
 cd guidance-for-industrial-digital-twin-on-aws/scripts/
 sh install.sh
 

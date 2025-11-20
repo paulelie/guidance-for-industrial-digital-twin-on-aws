@@ -116,7 +116,7 @@
                                 "",
                                 "yum install -y git",
                                 "\n",
-                                "git clone https://github.com/aws-solutions-library-samples/guidance-for-industrial-digital-twin-on-aws.git",                                
+                                "git clone https://github.com/paulelie/guidance-for-industrial-digital-twin-on-aws.git",                                
                                 "\n",
                                 "cd guidance-for-industrial-digital-twin-on-aws/scripts/",
                                 "\n",

@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT-0
 
 ### Download repos
-git clone https://github.com/aws-solutions-library-samples/breweries-sitewise-simulator.git
+git clone https://github.com/paulelie/guidance-for-industrial-digital-twin-on-aws.git
 
 ### Install Packages
 pip3 install boto3 --no-input
@@ -17,11 +17,12 @@ sh update_credentials.sh
 (crontab -l ; echo "*/30 * * * * sudo sh /guidance-for-industrial-digital-twin-on-aws/scripts/update_credentials.sh") | crontab -
 
 ### Setup Env Variables
-export AWS_DEFAULT_REGION=`wget -q -O - http://169.254.169.254/latest/meta-data/placement/region`
+export TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
+export AWS_DEFAULT_REGION=`wget -q -O - --header="X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/placement/region`
 export ROLE_NAME="EC2InstanceRole"
 export ACCOUNT_ID=`aws sts get-caller-identity --query "Account" --output text`
-export INSTANCE_ID=`wget -q -O - http://169.254.169.254/latest/meta-data/instance-id`
-export DOMAIN_NAME=`wget -q -O - http://169.254.169.254/latest/meta-data/public-hostname`
+export INSTANCE_ID=`wget -q -O - --header="X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/instance-id`
+export DOMAIN_NAME=`wget -q -O - --header="X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/public-hostname`
 export CURRENT_USER_ARN=arn:aws:sts::$ACCOUNT_ID:assumed-role/$ROLE_NAME/$INSTANCE_ID
 echo $CURRENT_USER_ARN
 
